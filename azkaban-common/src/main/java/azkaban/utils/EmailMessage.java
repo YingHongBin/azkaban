@@ -178,6 +178,7 @@ public class EmailMessage {
     props.put("mail.smtp.connectiontimeout", _connectionTimeout);
     props.put("mail.smtp.starttls.enable", this._tls);
     props.put("mail.smtp.ssl.trust", this._mailHost);
+    props.put("mail.smtp.ssl.enable", "true");
 
     final JavaxMailSender sender = this.creator.createSender(props);
     final Message message = sender.createMessage();

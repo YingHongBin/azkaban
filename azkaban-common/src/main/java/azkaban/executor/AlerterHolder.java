@@ -16,6 +16,7 @@
 package azkaban.executor;
 
 import azkaban.alert.Alerter;
+import azkaban.utils.DingtalkRobot;
 import azkaban.utils.Emailer;
 import azkaban.utils.FileIOUtils;
 import azkaban.utils.PluginUtils;
@@ -40,9 +41,10 @@ public class AlerterHolder {
   private Map<String, Alerter> alerters;
 
   @Inject
-  public AlerterHolder(final Props props, final Emailer mailAlerter) {
+  public AlerterHolder(final Props props, final Emailer mailAlerter, final DingtalkRobot dingtalkRobot) {
     try {
       this.alerters = loadAlerters(props, mailAlerter);
+      this.alerters.put("dingtalk", dingtalkRobot);
     } catch (final Exception ex) {
       logger.error(ex);
       this.alerters = new HashMap<>();
